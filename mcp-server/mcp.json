@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "x402-agent-service": {
+      "command": "node",
+      "args": [
+        "/Users/rishii/Projects/x402-agent-service/mcp-server/bin/mcp-server.js"
+      ],
+      "env": {
+        "X402_SERVICE_URL": "https://x402-agent-service.vercel.app",
+        "BASE_RPC_URL": "https://mainnet.base.org"
+      }
+    }
+  }
+}

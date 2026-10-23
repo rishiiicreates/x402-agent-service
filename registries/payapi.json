@@ -1,0 +1,42 @@
+{
+  "name": "x402 Agent Microservice",
+  "version": "1.0.0",
+  "description": "x402-enabled autonomous agent microservice accepting USDC on Base Mainnet",
+  "baseUrl": "https://x402-agent-service.vercel.app",
+  "manifest": "https://x402-agent-service.vercel.app/.well-known/x402",
+  "payment": {
+    "scheme": "x402",
+    "network": "base",
+    "chainId": 8453,
+    "currency": "USDC",
+    "tokenContract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "recipient": "0x3028C30B8c8985Bd54669BC313Fe7950fCeB1142",
+    "settlementHeader": "X-PAYMENT"
+  },
+  "endpoints": [
+    {
+      "path": "/api/crossword/generate",
+      "method": "POST",
+      "name": "Dynamic Crossword Generator",
+      "cost": "0.50",
+      "currency": "USDC",
+      "atomicUnits": "500000",
+      "parameters": {
+        "theme": { "type": "string", "description": "Theme for the puzzle" },
+        "difficulty": { "type": "string", "enum": ["easy", "medium", "hard"] }
+      }
+    },
+    {
+      "path": "/api/verify/email",
+      "method": "POST",
+      "name": "Fast Email & MAP Validator",
+      "cost": "0.25",
+      "currency": "USDC",
+      "atomicUnits": "250000",
+      "parameters": {
+        "email": { "type": "string", "required": true, "description": "Target email address" },
+        "checkMx": { "type": "boolean", "default": true, "description": "Query live DNS MX records" }
+      }
+    }
+  ]
+}

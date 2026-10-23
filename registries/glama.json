@@ -1,0 +1,35 @@
+{
+  "$schema": "https://glama.ai/mcp/schema.json",
+  "name": "x402-agent-service",
+  "title": "x402 Agent Microservice (Base USDC)",
+  "description": "Model Context Protocol server for autonomous x402 payment-gated microservices on Base Mainnet. Generates dynamic crossword puzzles ($0.50 USDC) and validates email schemas with DNS MX resolution ($0.25 USDC).",
+  "version": "1.0.0",
+  "homepage": "https://x402-agent-service.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rishiicreates/x402-agent-service"
+  },
+  "tools": [
+    {
+      "name": "x402_get_service_info",
+      "description": "Discover protocol specifications, active pricing, payee wallet, and token details."
+    },
+    {
+      "name": "x402_simulate_challenge",
+      "description": "Dry-run calling an endpoint to inspect the HTTP 402 challenge and payment instructions without spending gas or tokens."
+    },
+    {
+      "name": "x402_generate_crossword",
+      "description": "Generate dynamic crossword grid with progressive hints and rebus cells ($0.50 USDC on Base)."
+    },
+    {
+      "name": "x402_verify_email",
+      "description": "Validate email syntax RFC 5322 & query live DNS MX host records ($0.25 USDC on Base)."
+    },
+    {
+      "name": "x402_execute_payment",
+      "description": "Direct onchain settlement helper to execute USDC transfers on Base Mainnet to recipient wallet 0x3028C30B8c8985Bd54669BC313Fe7950fCeB1142."
+    }
+  ],
+  "categories": ["crypto", "web3", "finance", "developer-tools"]
+}

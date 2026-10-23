@@ -57,6 +57,29 @@ function getManifest() {
         sampleBody: {
           theme: "Decentralized Systems & AI",
           difficulty: "medium"
+        },
+        extensions: {
+          bazaar: {
+            info: {
+              name: CONFIG.endpoints["/api/crossword/generate"].name,
+              description: CONFIG.endpoints["/api/crossword/generate"].description,
+              input: {
+                type: "http",
+                method: "POST",
+                routeTemplate: "/api/crossword/generate",
+                bodySchema: {
+                  type: "object",
+                  properties: {
+                    theme: { type: "string", description: "Crossword theme topic or genre" },
+                    difficulty: { type: "string", enum: ["easy", "medium", "hard"], default: "medium" }
+                  }
+                }
+              },
+              output: {
+                format: "json"
+              }
+            }
+          }
         }
       },
       "/api/verify/email": {
@@ -73,7 +96,39 @@ function getManifest() {
         sampleBody: {
           email: "satoshinakamoto@gmx.com",
           checkMx: true
+        },
+        extensions: {
+          bazaar: {
+            info: {
+              name: CONFIG.endpoints["/api/verify/email"].name,
+              description: CONFIG.endpoints["/api/verify/email"].description,
+              input: {
+                type: "http",
+                method: "POST",
+                routeTemplate: "/api/verify/email",
+                bodySchema: {
+                  type: "object",
+                  properties: {
+                    email: { type: "string", format: "email", description: "Email address to validate" },
+                    checkMx: { type: "boolean", default: true, description: "Whether to query live DNS MX host records" }
+                  },
+                  required: ["email"]
+                }
+              },
+              output: {
+                format: "json"
+              }
+            }
+          }
         }
+      }
+    },
+    extensions: {
+      bazaar: {
+        version: "0.2.0",
+        provider: "x402 Agent Microservice",
+        settlementNetwork: "base",
+        settlementAsset: "USDC"
       }
     },
     docs: "https://x402.org",

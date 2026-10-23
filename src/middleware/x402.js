@@ -116,6 +116,7 @@ export function requirePayment(priceUsdc, endpointPath) {
     }
 
     // Build standard 402 challenge response
+    const endpointMeta = CONFIG.endpoints[endpointPath] || {};
     const paymentChallenge = {
       network: CONFIG.network,
       chainId: CONFIG.chainId,
@@ -127,7 +128,23 @@ export function requirePayment(priceUsdc, endpointPath) {
       payee: CONFIG.payeeAddress,
       recipient: CONFIG.payeeAddress,
       rpcUrl: CONFIG.rpcUrl,
-      instructions: `Transfer at least ${priceUsdc.toFixed(2)} USDC (${amountUnits.toString()} atomic units) to recipient address ${CONFIG.payeeAddress} on Base Mainnet (Chain ID ${CONFIG.chainId}). Retransmit your request with header 'X-PAYMENT: <transaction_hash>'.`
+      instructions: `Transfer at least ${priceUsdc.toFixed(2)} USDC (${amountUnits.toString()} atomic units) to recipient address ${CONFIG.payeeAddress} on Base Mainnet (Chain ID ${CONFIG.chainId}). Retransmit your request with header 'X-PAYMENT: <transaction_hash>'.`,
+      extensions: {
+        bazaar: {
+          info: {
+            name: endpointMeta.name || "x402 Microservice",
+            description: endpointMeta.description || "x402 Paid Endpoint",
+            input: {
+              type: "http",
+              method: "POST",
+              routeTemplate: endpointPath
+            },
+            output: {
+              format: "json"
+            }
+          }
+        }
+      }
     };
 
     // If no payment header provided, return 402 Payment Required

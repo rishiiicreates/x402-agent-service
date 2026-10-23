@@ -1,0 +1,40 @@
+{
+  "name": "x402-agent-mcp",
+  "version": "1.0.0",
+  "description": "Model Context Protocol (MCP) server, autonomous client SDK, and agent integrations for x402 Base Mainnet USDC micropayment services",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "x402-mcp": "./bin/mcp-server.js"
+  },
+  "exports": {
+    ".": "./src/index.js",
+    "./client": "./src/client.js",
+    "./server": "./src/server.js",
+    "./plugins/elizaos": "./src/plugins/elizaos.js",
+    "./plugins/agentkit": "./src/plugins/agentkit.js",
+    "./plugins/langchain": "./src/plugins/langchain.js"
+  },
+  "scripts": {
+    "start": "node bin/mcp-server.js",
+    "test": "node test-client.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "x402",
+    "base",
+    "usdc",
+    "coinbase-agentkit",
+    "elizaos",
+    "agentic-commerce",
+    "micropayments"
+  ],
+  "author": "Rishii",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.20.2",
+    "viem": "^2.45.0",
+    "zod": "^4.6.7"
+  }
+}
