@@ -1,0 +1,28 @@
+{
+  "name": "x402-agent-service",
+  "version": "1.0.0",
+  "description": "Production-ready x402-compliant API micro-service accepting USDC on Base Mainnet",
+  "main": "api/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node tests/verify.js"
+  },
+  "keywords": [
+    "x402",
+    "base",
+    "usdc",
+    "payment-required",
+    "web3",
+    "agentic-ai",
+    "crossword",
+    "email-validator"
+  ],
+  "author": "Rishii",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}

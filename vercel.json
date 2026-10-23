@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/.well-known/x402", "destination": "/api/manifest" },
+    { "source": "/api/crossword/generate", "destination": "/api/crossword/generate" },
+    { "source": "/api/verify/email", "destination": "/api/verify/email" },
+    { "source": "/(.*)", "destination": "/api/index" }
+  ]
+}
