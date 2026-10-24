@@ -5,6 +5,8 @@
   "main": "src/index.js",
   "type": "module",
   "bin": {
+    "x402-agent-service": "./bin/mcp-server.js",
+    "x402-agent-mcp": "./bin/mcp-server.js",
     "x402-mcp": "./bin/mcp-server.js"
   },
   "exports": {
@@ -17,7 +19,8 @@
   },
   "scripts": {
     "start": "node bin/mcp-server.js",
-    "test": "node test-client.js"
+    "test": "node test-client.js",
+    "test:nitrosend": "node test-nitrosend.js"
   },
   "keywords": [
     "mcp",

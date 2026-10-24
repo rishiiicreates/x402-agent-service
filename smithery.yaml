@@ -1,0 +1,39 @@
+# Smithery Registry Configuration for x402 Agent Microservice
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      serviceUrl:
+        type: string
+        title: x402 Service Base URL
+        description: Target URL of the x402 payment service
+        default: "https://x402-agent-service.vercel.app"
+      baseRpcUrl:
+        type: string
+        title: Base JSON-RPC URL
+        description: Base Mainnet RPC endpoint for verifying or sending transactions
+        default: "https://mainnet.base.org"
+      basePrivateKey:
+        type: string
+        title: Base Private Key (Hex)
+        description: Optional private key used by the agent to automatically settle USDC transfers on Base
+      bypassSecret:
+        type: string
+        title: Test Bypass Secret
+        description: Optional bypass secret for zero-gas sandbox testing
+        default: ""
+  commandFunction: |-
+    (config) => ({
+      command: 'node',
+      args: ['mcp-server/bin/mcp-server.js'],
+      env: {
+        X402_SERVICE_URL: config.serviceUrl || 'https://x402-agent-service.vercel.app',
+        BASE_RPC_URL: config.baseRpcUrl || 'https://mainnet.base.org',
+        ...(config.basePrivateKey ? { BASE_PRIVATE_KEY: config.basePrivateKey } : {}),
+        ...(config.bypassSecret ? { X402_TEST_BYPASS_SECRET: config.bypassSecret } : {})
+      }
+    })
+  exampleConfig:
+    serviceUrl: "https://x402-agent-service.vercel.app"
+    baseRpcUrl: "https://mainnet.base.org"

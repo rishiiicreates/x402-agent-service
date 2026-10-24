@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "x402-agent-service": {
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/mcp-server/bin/mcp-server.js"
+      ],
+      "env": {
+        "X402_SERVICE_URL": "https://x402-agent-service.vercel.app",
+        "BASE_RPC_URL": "https://mainnet.base.org"
+      }
+    },
+    "nitrosend": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@nitrosend/mcp"
+      ],
+      "env": {
+        "NITROSEND_API_KEY": "nskey_live_1424b94df72518fecbe67cf1304054bc"
+      }
+    }
+  }
+}

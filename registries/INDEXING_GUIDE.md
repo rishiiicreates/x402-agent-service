@@ -117,3 +117,54 @@ Submit a pull request to community curated lists:
   ```
 - `wong2/awesome-mcp-servers`
 - `mcp.so` directory
+
+---
+
+## 7. Nitrosend MCP Client Integration
+
+Nitrosend provides autonomous email marketing, transactional notifications, and delivery infrastructure via Model Context Protocol.
+
+### Live Connection Specs:
+- **Endpoint URL:** `https://api.nitrosend.com/mcp`
+- **Protocol:** JSON-RPC 2.0 (2024-11-05 spec) over HTTPS / stdio bridge
+- **Authentication:** `Authorization: Bearer <NITROSEND_API_KEY>`
+- **Active Sending Domain:** `shiro-agy.nitrosend.net`
+- **Pre-configured Stdio Bridge:** `@nitrosend/mcp`
+
+### Available Tools (25 Total):
+- `nitro_get_status`: Account readiness, sender identity, and deliverability checks
+- `nitro_send_message`: Send transactional email/SMS
+- `nitro_manage_audience`: Audience contact records, tags, and subscriptions
+- `nitro_search_contacts`: Query contacts by email, phone, or name
+- `nitro_manage_domains`: Custom and shared sending domain controls
+- `nitro_compose_campaign`: Draft email/SMS broadcasts
+- `nitro_compose_flow`: Multi-step automation sequencing
+- `nitro_get_insights`: Campaign and delivery analytics
+
+### x402 & Nitrosend Autonomous Workflow Synergy:
+1. Agent discovers recipient email.
+2. Agent calls `x402_verify_email` ($0.25 USDC on Base Mainnet) to run RFC 5322 validation and live DNS MX resolution.
+3. Once verified deliverable with zero syntax errors, agent calls Nitrosend `nitro_send_message` or `nitro_import_contacts` to dispatch messages with 100% reputation preservation.
+
+### Configuration in Claude Desktop / Cursor:
+```json
+{
+  "mcpServers": {
+    "x402-agent-service": {
+      "command": "node",
+      "args": ["/Users/rishii/Projects/x402-agent-service/mcp-server/bin/mcp-server.js"],
+      "env": {
+        "X402_SERVICE_URL": "https://x402-agent-service.vercel.app",
+        "BASE_RPC_URL": "https://mainnet.base.org"
+      }
+    },
+    "nitrosend": {
+      "command": "npx",
+      "args": ["-y", "@nitrosend/mcp"],
+      "env": {
+        "NITROSEND_API_KEY": "nskey_live_1424b94df72518fecbe67cf1304054bc"
+      }
+    }
+  }
+}
+```
